@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  coreci.api:
+    image: coreci.api
+    build:
+      context: ./CoreCI.API
+      dockerfile: Dockerfile

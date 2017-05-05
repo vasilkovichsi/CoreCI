@@ -1,0 +1,12 @@
+{
+  "Modules": {
+    "ModuleList": [
+      {
+        "Name": "TestModule",
+        "Application": "app1",
+        "Type": "CoreCI.Modules.Test",
+        "Initializer": "CoreCI.Modules.Test.TestModule"
+      }
+    ]
+  }
+}
