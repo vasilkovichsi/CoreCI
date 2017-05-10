@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreCI.Models\CoreCI.Models.csproj" />
+    <Folder Include="Project\" />
   </ItemGroup>
 
 </Project>

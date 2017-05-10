@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using CoreCI.Common.IoC.Interfaces;
 using CoreCI.Common.Modularity;
 using CoreCI.Common.Modularity.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace CoreCI.Common
 {
@@ -23,8 +19,6 @@ namespace CoreCI.Common
             container.BuildServiceProvider();
 
             container.Register<IModulesLoader, ModulesLoader>();
-            var tmp = container.GetService<IModulesLoader>();
-            tmp.InitializeModules("app1");
         }
     }
 }

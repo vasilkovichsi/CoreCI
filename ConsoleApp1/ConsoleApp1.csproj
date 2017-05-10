@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreCI.Models\CoreCI.Models.csproj" />
+    <ProjectReference Include="..\CoreCI\CoreCi.Modules.Test\CoreCI.Modules.Test.csproj" />
   </ItemGroup>
 
 </Project>

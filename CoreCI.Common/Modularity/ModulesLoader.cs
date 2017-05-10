@@ -9,16 +9,32 @@ using Microsoft.Extensions.Options;
 
 namespace CoreCI.Common.Modularity
 {
+    /// <summary>
+    /// Resolve and register application modules.
+    /// </summary>
+    /// <seealso cref="CoreCI.Common.Modularity.Interfaces.IModulesLoader" />
     public class ModulesLoader : IModulesLoader
     {
         private readonly IContainer _container;
         private readonly IOptions<ConfigModel> _options;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModulesLoader"/> class.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="options">The options.</param>
         public ModulesLoader(IContainer container, IOptions<ConfigModel> options)
         {
             _container = container;
             _options = options;
         }
 
+        /// <summary>
+        /// Initialize modules from config by provided application type.
+        /// </summary>
+        /// <param name="appType">Type of application.</param>
+        /// <exception cref="System.ArgumentException">Argument shouldn't be empty or null - appType</exception>
+        /// <exception cref="System.DllNotFoundException"></exception>
         public void InitializeModules(string appType)
         {
             if (string.IsNullOrEmpty(appType))
