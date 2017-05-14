@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Loader;
 using CoreCI.Common.IoC.Interfaces;
+using CoreCI.Common.Logging.Interfaces;
 using CoreCI.Common.Modularity.Interfaces;
 using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.Options;
@@ -17,16 +18,19 @@ namespace CoreCI.Common.Modularity
     {
         private readonly IContainer _container;
         private readonly IOptions<ConfigModel> _options;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModulesLoader"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="options">The options.</param>
-        public ModulesLoader(IContainer container, IOptions<ConfigModel> options)
+        /// <param name="logger">The logger.</param>
+        public ModulesLoader(IContainer container, IOptions<ConfigModel> options, ILogger logger)
         {
             _container = container;
             _options = options;
+            _logger = logger;
         }
 
         /// <summary>
@@ -59,7 +63,7 @@ namespace CoreCI.Common.Modularity
                         }
                         catch (Exception ex)
                         {
-                            //Log.Error(ex);
+                            _logger.LogException(ex);
                             throw;
                         }
                     }

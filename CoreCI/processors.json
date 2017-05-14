@@ -1,0 +1,14 @@
+{
+  "Processors": {
+    "ProcessorsList": [
+      {
+        "Name": "ServiceProcessor",
+        "Class": "CoreCI.CommandCenter.Processing"
+      },
+      {
+        "Name": "BuildProcessor",
+        "Class": "CoreCI.CommandCenter.Processing"
+      }
+    ]
+  }
+}

@@ -19,8 +19,12 @@ namespace CoreCI.CommandCenter
         {
             IDictionary<IProcessor, Thread> _processors = new Dictionary<IProcessor, Thread>();
             IContainer container = new Container();
-            IBootstrapper bootstrapper = new Common.Bootstrapper();
+            IBootstrapper commonBootstrapper = new Common.Bootstrapper();
+            commonBootstrapper.InitializeContainer(container);
+
+            IBootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.InitializeContainer(container);
+
             container.BuildServiceProvider();
             container.GetService<IModulesLoader>().InitializeModules("CommandCenter");
 

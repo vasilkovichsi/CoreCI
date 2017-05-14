@@ -6,5 +6,6 @@ namespace CoreCI.Models.BuildItem
 {
     public class BuildItem
     {
+        public int Id { get; set; }
     }
 }

@@ -15,14 +15,8 @@ namespace CoreCI.Common
         {
             container.Register<IModulesLoader, ModulesLoader>();
             container.Register<ILogger, Log4NetLogger>(LifeTimeManager.ContainerControlled);
-            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("config.json");
-            IConfigurationRoot config = configurationBuilder.Build();
 
-            container.AddOptions(config);
-            container.Configure<ConfigModel>(config);
             container.BuildServiceProvider();
-
-            container.Register<IModulesLoader, ModulesLoader>();
         }
     }
 }
