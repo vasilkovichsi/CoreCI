@@ -12,8 +12,8 @@ namespace CoreCI.Common.Processors
 
     public class Processor
     {
-        public string Name { get; set; }
         public string Class { get; set; }
+        public string Assembly { get; set; }
     }
 
     public class Processors

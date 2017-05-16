@@ -14,6 +14,7 @@ namespace CoreCI.Common
         public void InitializeContainer(IContainer container)
         {
             container.Register<IModulesLoader, ModulesLoader>();
+            container.Register<IProcessorsLoader, ProcessorsLoader>();
             container.Register<ILogger, Log4NetLogger>(LifeTimeManager.ContainerControlled);
 
             container.BuildServiceProvider();

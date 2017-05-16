@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using CoreCI.Common.IoC;
@@ -28,10 +27,10 @@ namespace CoreCI.CommandCenter
             container.BuildServiceProvider();
             container.GetService<IModulesLoader>().InitializeModules("CommandCenter");
 
-            IEnumerable<IProcessor> processors = container.GetServices<IProcessor>();
+            IEnumerable<IProcessor> processors = container.GetService<IProcessorsLoader>().InitializeProcessors();
             foreach (IProcessor processor in processors)
             {
-                _processors.Add(processor, new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
@@ -40,13 +39,19 @@ namespace CoreCI.CommandCenter
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
-                        throw;
                     }
-                }));
+                });
+                thread.Start();
+                _processors.Add(processor, thread);
             }
 
             Console.ReadKey();
-            
+            foreach (KeyValuePair<IProcessor, Thread> processor in _processors)
+            {
+                processor.Key.Terminate();
+                processor.Value.Join();
+            }
+            Console.ReadKey();
         }
     }
 }

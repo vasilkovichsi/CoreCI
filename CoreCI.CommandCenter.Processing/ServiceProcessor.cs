@@ -9,12 +9,12 @@ namespace CoreCI.CommandCenter.Processing
     {
         public void Run()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ServiceProcessor activated");
         }
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ServiceProcessor terminated");
         }
     }
 }

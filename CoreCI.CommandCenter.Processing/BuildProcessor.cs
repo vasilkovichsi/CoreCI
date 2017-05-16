@@ -1,4 +1,5 @@
-﻿using CoreCI.Common.Processors;
+﻿using System;
+using CoreCI.Common.Processors;
 
 namespace CoreCI.CommandCenter.Processing
 {
@@ -6,12 +7,12 @@ namespace CoreCI.CommandCenter.Processing
     {
         public void Run()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("BuildProcessor activated");
         }
 
         public void Terminate()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("BuildProcessor terminated");
         }
     }
 }

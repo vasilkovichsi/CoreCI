@@ -2,12 +2,12 @@
   "Processors": {
     "ProcessorsList": [
       {
-        "Name": "ServiceProcessor",
-        "Class": "CoreCI.CommandCenter.Processing"
+        "Class": "CoreCI.CommandCenter.Processing.ServiceProcessor",
+        "Assembly": "CoreCI.CommandCenter.Processing"
       },
       {
-        "Name": "BuildProcessor",
-        "Class": "CoreCI.CommandCenter.Processing"
+        "Class": "CoreCI.CommandCenter.Processing.BuildProcessor",
+        "Assembly": "CoreCI.CommandCenter.Processing"
       }
     ]
   }
