@@ -43,7 +43,7 @@ namespace CoreCI.Common.Modularity
         public IList<IProcessor> InitializeProcessors()
         {
             IEnumerable<Processor> processors = _options.Value.Processors.ProcessorsList;
-            IList<IProcessor> resolvedProcessors = new List<IProcessor>();
+            List<IProcessor> resolvedProcessors = new List<IProcessor>();
             foreach (Processor processor in processors)
             {
                 Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath($@"{ApplicationEnvironment.ApplicationBasePath}\{processor.Assembly}.dll");
@@ -56,7 +56,8 @@ namespace CoreCI.Common.Modularity
                         if (moduleType != null)
                         {
                             _container.Register(moduleType);
-                            resolvedProcessors.Add((IProcessor)Activator.CreateInstance(moduleType));
+                            _container.BuildServiceProvider();
+                            resolvedProcessors.Add((IProcessor)_container.GetService(moduleType));
                         }
                     }
                     catch (Exception ex)
@@ -70,6 +71,8 @@ namespace CoreCI.Common.Modularity
                     throw new DllNotFoundException(processor.Assembly);
                 }
             }
+            
+            
             return resolvedProcessors;
         }
     }

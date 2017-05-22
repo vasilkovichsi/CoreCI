@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using CoreCI.Common.Logging.Interfaces;
 using CoreCI.Models.BuildItem;
 
 namespace CoreCI.Logic.BuildQueue
 {
     internal class BuildQueue : IBuildQueue
     {
+        private readonly ILogger _logger;
+
+        public BuildQueue(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         private readonly ConcurrentQueue<BuildItem> _queue = new ConcurrentQueue<BuildItem>();
         public bool Add(BuildItem item)
         {
@@ -16,6 +24,7 @@ namespace CoreCI.Logic.BuildQueue
             }
             catch (Exception e)
             {
+                _logger.LogException(e);
                 throw;
             }
             
@@ -30,6 +39,7 @@ namespace CoreCI.Logic.BuildQueue
             }
             catch (Exception e)
             {
+                _logger.LogException(e);
                 throw;
             }
         }
@@ -50,6 +60,7 @@ namespace CoreCI.Logic.BuildQueue
             }
             catch (Exception e)
             {
+                _logger.LogException(e);
                 throw;
             }
         }

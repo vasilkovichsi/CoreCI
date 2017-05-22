@@ -8,6 +8,10 @@
       {
         "Class": "CoreCI.CommandCenter.Processing.BuildProcessor",
         "Assembly": "CoreCI.CommandCenter.Processing"
+      },
+      {
+        "Class": "CoreCI.CommandCenter.Processing.BuildProcessor",
+        "Assembly": "CoreCI.CommandCenter.Processing"
       }
     ]
   }

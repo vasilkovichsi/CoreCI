@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CoreCI.Common.Communication;
 using CoreCI.Common.Processors;
 
 namespace CoreCI.CommandCenter.Processing
 {
-    internal class ServiceProcessor : IProcessor
+    internal class ServiceProcessor : BaseProcessor, IProcessor
     {
-        public void Run()
+        private readonly IMessenger _messageHandler;
+        public ServiceProcessor(IMessenger messageHandler)
         {
-            Console.WriteLine("ServiceProcessor activated");
+            _messageHandler = messageHandler;
         }
 
-        public void Terminate()
+        public override void Run()
+        {
+            Console.WriteLine("ServiceProcessor started");
+        }
+
+        public override void Terminate()
         {
             Console.WriteLine("ServiceProcessor terminated");
         }

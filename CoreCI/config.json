@@ -6,6 +6,12 @@
         "Application": "app1",
         "Type": "CoreCI.Modules.Test",
         "Initializer": "CoreCI.Modules.Test.TestModule"
+      },
+      {
+        "Name": "WebSockets",
+        "Application": "CommandCenter",
+        "Type": "CoreCI.Modules.WebSockets",
+        "Initializer": "CoreCI.Modules.WebSockets.WebSocketModule"
       }
     ]
   }
