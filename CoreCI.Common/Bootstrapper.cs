@@ -5,7 +5,6 @@ using CoreCI.Common.Logging;
 using CoreCI.Common.Logging.Interfaces;
 using CoreCI.Common.Modularity;
 using CoreCI.Common.Modularity.Interfaces;
-using Microsoft.Extensions.Configuration;
 
 namespace CoreCI.Common
 {

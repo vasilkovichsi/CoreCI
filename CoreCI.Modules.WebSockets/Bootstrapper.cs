@@ -10,6 +10,10 @@ namespace CoreCI.Modules.WebSockets
 {
     public class Bootstrapper : IBootstrapper
     {
+        /// <summary>
+        /// Initializes the container.
+        /// </summary>
+        /// <param name="container">The container.</param>
         public void InitializeContainer(IContainer container)
         {
             IBootstrapper bootstrapper = new Common.Bootstrapper();

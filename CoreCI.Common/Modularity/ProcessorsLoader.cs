@@ -71,8 +71,6 @@ namespace CoreCI.Common.Modularity
                     throw new DllNotFoundException(processor.Assembly);
                 }
             }
-            
-            
             return resolvedProcessors;
         }
     }
