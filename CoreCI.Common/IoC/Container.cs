@@ -20,6 +20,9 @@ namespace CoreCI.Common.IoC
         public Container()
         {
             _collection = new ServiceCollection();
+            _provider = _collection.BuildServiceProvider();
+            _collection.AddSingleton<IServiceCollection>(_collection);
+            _collection.AddSingleton<IServiceProvider>(_provider);
             _collection.AddSingleton<IContainer>(this);
         }
 

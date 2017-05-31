@@ -5,5 +5,6 @@ namespace CoreCI.Common.Modularity.Interfaces
     public interface IModule
     {
         void InitializeModule(IContainer container);
+        void InitializeModuleDependencies(IContainer container, string moduleFolder);
     }
 }

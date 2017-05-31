@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 using CoreCI.Common.IoC.Interfaces;
@@ -19,6 +20,7 @@ namespace CoreCI.Common.Modularity
         private readonly IContainer _container;
         private readonly IOptions<ConfigModel> _options;
         private readonly ILogger _logger;
+        private readonly IAssemblyLoader _loader;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModulesLoader"/> class.
@@ -26,11 +28,12 @@ namespace CoreCI.Common.Modularity
         /// <param name="container">The container.</param>
         /// <param name="options">The options.</param>
         /// <param name="logger">The logger.</param>
-        public ModulesLoader(IContainer container, IOptions<ConfigModel> options, ILogger logger)
+        public ModulesLoader(IContainer container, IOptions<ConfigModel> options, ILogger logger, IAssemblyLoader loader)
         {
             _container = container;
             _options = options;
             _logger = logger;
+            _loader = loader;
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace CoreCI.Common.Modularity
             {
                 if (moduleMetadata.Application.Equals(appType, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath($@"{ApplicationEnvironment.ApplicationBasePath}\Modules\{moduleMetadata.Type}.dll");
+                    Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(moduleMetadata.Folder, $@"{moduleMetadata.Type}.dll"));
 
                     if (assembly != null)
                     {
@@ -59,6 +62,7 @@ namespace CoreCI.Common.Modularity
                         {
                             Type moduleType = assembly.GetType(moduleMetadata.Initializer);
                             IModule module = (IModule) Activator.CreateInstance(moduleType);
+                           // module?.InitializeModuleDependencies(_container, moduleMetadata.Folder);
                             module?.InitializeModule(_container);
                         }
                         catch (Exception ex)

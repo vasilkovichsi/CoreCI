@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using CoreCI.Common.Communication;
 using CoreCI.Common.IoC.Interfaces;
+using CoreCI.Common.Modularity.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,11 +20,18 @@ namespace CoreCI.Modules.WebSockets
         /// <summary>
         /// Initializes a new instance of the <see cref="WebSocketMessenger"/> class.
         /// </summary>
-        public WebSocketMessenger()
+        public WebSocketMessenger(IContainer container, IAssemblyLoader loader)
         {
+            IServiceCollection collection = container.GetService<IServiceCollection>();
+            
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .ConfigureServices(serviceCollection =>
+                    {
+                        serviceCollection.AddSingleton<IServiceCollection>(collection);
+                    })
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                
                 .UseStartup<Startup>().Build();
             host.Run(_cancelationToken.Token);
         }
@@ -65,11 +74,13 @@ namespace CoreCI.Modules.WebSockets
         /// Configures the specified application.
         /// </summary>
         /// <param name="app">The application.</param>
-        /// <param name="container">The container.</param>
-        public void Configure(IApplicationBuilder app, IContainer container)
+        /// <param name="collection">The container.</param>
+        public void Configure(IApplicationBuilder app, IServiceCollection collection)
         {
             app.UseWebSockets();
-            app.MapWebSocketManager("/messenging", container.GetService<WebSocketMessageHandler>());
+            IContainer container = collection.BuildServiceProvider().GetService<IContainer>();
+
+            app.MapWebSocketManager("/messenging", (WebSocketHandler)container.GetService(typeof(WebSocketMessageHandler)));
 
             app.UseStaticFiles();
         }
@@ -77,10 +88,10 @@ namespace CoreCI.Modules.WebSockets
         /// <summary>
         /// Configures the services.
         /// </summary>
-        /// <param name="container">The container.</param>
-        public void ConfigureServices(IContainer container)
+        /// <param name="collection">The collection.</param>
+        public void ConfigureServices(IServiceCollection collection)
         {
-            container.AddWebSocketManager();
+            collection.AddWebSocketManager();
         }
     }
 }

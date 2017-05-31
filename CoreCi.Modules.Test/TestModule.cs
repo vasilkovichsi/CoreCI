@@ -10,5 +10,10 @@ namespace CoreCI.Modules.Test
         {
             Console.WriteLine("test");
         }
+
+        public void InitializeModuleDependencies(IContainer container, string moduleFolder)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

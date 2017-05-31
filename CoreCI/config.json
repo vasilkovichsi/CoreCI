@@ -1,17 +1,19 @@
 {
   "Modules": {
     "ModuleList": [
-      {
-        "Name": "TestModule",
-        "Application": "app1",
-        "Type": "CoreCI.Modules.Test",
-        "Initializer": "CoreCI.Modules.Test.TestModule"
-      },
+      //{
+      //  "Name": "TestModule",
+      //  "Application": "app1",
+      //  "Type": "CoreCI.Modules.Test",
+      //  "Initializer": "CoreCI.Modules.Test.TestModule",
+      //  "Folder": "g:\\work\\Core CI\\CoreCI\\bin\\Debug\\netcoreapp1.1\\Modules"
+      //},
       {
         "Name": "WebSockets",
         "Application": "CommandCenter",
         "Type": "CoreCI.Modules.WebSockets",
-        "Initializer": "CoreCI.Modules.WebSockets.WebSocketModule"
+        "Initializer": "CoreCI.Modules.WebSockets.WebSocketModule",
+        "Folder": "g:\\work\\Core CI\\CoreCI\\bin\\Debug\\netcoreapp1.1\\Modules\\WebSocketsModule"
       }
     ]
   }

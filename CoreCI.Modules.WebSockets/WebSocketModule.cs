@@ -1,4 +1,5 @@
-﻿using CoreCI.Common.IoC.Interfaces;
+﻿using System.Reflection;
+using CoreCI.Common.IoC.Interfaces;
 using CoreCI.Common.Modularity.Interfaces;
 
 namespace CoreCI.Modules.WebSockets
@@ -13,6 +14,12 @@ namespace CoreCI.Modules.WebSockets
         {
             IBootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.InitializeContainer(container);
+        }
+
+        public void InitializeModuleDependencies(IContainer container, string moduleFolder)
+        {
+            IAssemblyLoader loader = container.GetService<IAssemblyLoader>();
+            loader.LoadAssembliesForModule(moduleFolder, "CoreCI.Modules.WebSockets.dll");
         }
     }
 }

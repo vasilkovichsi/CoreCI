@@ -16,6 +16,7 @@ namespace CoreCI.Common.Modularity
         public string Type { get; set; }
         public string Application { get; set; }
         public string Initializer { get; set; }
+        public string Folder { get; set; }
     }
     public class Modules
     {

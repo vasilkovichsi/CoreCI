@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CoreCI.Common.Communication;
+﻿using CoreCI.Common.Communication;
 using CoreCI.Common.IoC.Interfaces;
 using CoreCI.Modules.WebSockets.Interfaces;
 using WebSocketManager;
@@ -21,6 +18,7 @@ namespace CoreCI.Modules.WebSockets
 
             container.Register<IWebSocketMessageHandler, WebSocketMessageHandler>();
             container.Register(typeof(WebSocketMessageHandler));
+            container.Register(typeof(WebSocketConnectionManager));
             container.Register<IMessenger, WebSocketMessenger>();
         }
     }

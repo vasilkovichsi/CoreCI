@@ -5,6 +5,8 @@ using CoreCI.Common.Logging;
 using CoreCI.Common.Logging.Interfaces;
 using CoreCI.Common.Modularity;
 using CoreCI.Common.Modularity.Interfaces;
+using CoreCI.Common.Serialization;
+using CoreCI.Common.Serialization.Interfaces;
 
 namespace CoreCI.Common
 {
@@ -14,6 +16,8 @@ namespace CoreCI.Common
         {
             container.Register<IModulesLoader, ModulesLoader>();
             container.Register<IProcessorsLoader, ProcessorsLoader>();
+            container.Register<IAssemblyLoader, AssemblyLoader>();
+            container.Register<ISerializer, JsonSerializer>();
             container.Register<ILogger, Log4NetLogger>(LifeTimeManager.ContainerControlled);
 
             container.BuildServiceProvider();
